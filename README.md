@@ -21,6 +21,6 @@ unexpected ways or breaches any limits
 
 
 #### It mainly has 3 functions 
-1. insert data
-2. read data
-3. delete data
+1. insert data - syntax "insertData(key_name,value,timeout_value)" timeout is optional you can continue by passing two arguments without timeout
+2. read data - for read operation use of syntax "readData(key_name)"
+3. delete data - for delete operation use syntax "delete(key_name)"
