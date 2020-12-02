@@ -18,3 +18,9 @@ the key will no longer be available for Read or Delete operations.
 unexpected ways or breaches any limits
 8. The file size never exceeds 1GB
 9. The file is accessed by multi-threading
+
+
+#### It mainly has 3 functions 
+1. insert data
+2. read data
+3. delete data
