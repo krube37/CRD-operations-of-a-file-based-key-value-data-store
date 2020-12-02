@@ -20,7 +20,19 @@ unexpected ways or breaches any limits
 9. The file is accessed by multi-threading
 
 
-#### It mainly has 3 functions 
+Overview:
+For the users to use this library mainly 3 functions are exposed as below
 1. insert data - syntax "insertData(key_name,value,timeout_value)" timeout is optional you can continue by passing two arguments without timeout
 2. read data - for read operation use of syntax "readData(key_name)"
 3. delete data - for delete operation use syntax "delete(key_name)"
+
+Architecture:
+Files are used to store the data,this in order to achieve persistence.
+During the initial loadup we read all the data present in the file and load it into a in-memory cache. We use hash-map to achieve this.
+When ever a new request comes to read/write/delete the operation is performed on the hash-map and not the file, this done to achieve faster performance.
+When the apllication is shutdown or closed, all the hash-map data is written to files again, to achieve persistence.
+
+Mutex-locks are used to guarantee concurrency and in order to delete the entries with "Time to live" property, a thread is run in the back ground which checks every 5 seconds for entries are expired and deleted them.
+During inserting the data , we add the "time to live" to current time and insert it, the thread will check if this time has exceeded and if yes it goes on to delete the entry.
+
+Singleton design pattern is used to achieve single object access.
